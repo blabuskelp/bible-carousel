@@ -32,7 +32,7 @@ function startCarousel() {
     window.lastScrollY = window.scrollY;
 
     // Slower, smoother scroll reaction
-    userVelocity += delta * 0.05; // smaller multiplier = slower scroll effect
+    userVelocity += delta * 0.02; // smaller multiplier = slower scroll effect
   });
 
   function animate() {
