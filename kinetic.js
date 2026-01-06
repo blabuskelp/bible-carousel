@@ -1,7 +1,7 @@
 const track = document.getElementById("carousel-track");
 let position = 0;
-let velocity = 1;      // base auto-scroll speed (pixels/frame)
-let userVelocity = 0;  // reacts to user scroll
+const baseVelocity = 1;  // constant auto-scroll speed
+let userVelocity = 0;
 let loopWidth;
 
 const images = track.querySelectorAll("img");
@@ -26,30 +26,25 @@ function startCarousel() {
   track.innerHTML += track.innerHTML;
   loopWidth = track.scrollWidth / 2;
 
-  // Track vertical scroll (user input)
+  // Track vertical scroll
   window.addEventListener("scroll", () => {
     const delta = window.scrollY - (window.lastScrollY || 0);
     window.lastScrollY = window.scrollY;
-
-    // Slower, smoother scroll reaction
-    userVelocity += delta * 0.02; // smaller multiplier = slower scroll effect
+    userVelocity += delta * 0.03; // slower, smoother scroll effect
   });
 
   function animate() {
-    // Combine base auto-scroll with user input
-    position += velocity + userVelocity;
+    // Base auto-scroll + user input
+    position += baseVelocity + userVelocity;
 
     // Smooth out user input over time
-    userVelocity *= 0.5;
+    userVelocity *= 0.8;
 
     // Infinite wrap
     if (position > loopWidth) position -= loopWidth;
     if (position < 0) position += loopWidth;
 
     track.style.transform = `translateX(${-position}px)`;
-
-    // Slight friction to keep auto-scroll smooth
-    velocity *= 0.99;
 
     requestAnimationFrame(animate);
   }
