@@ -1,11 +1,10 @@
-// Infinite kinetic carousel engine with images loaded check
 const track = document.getElementById("carousel-track");
 let position = 0;
-let velocity = 0.3; // base auto-scroll speed
-let lastScroll = window.scrollY;
+let velocity = 1;      // base auto-scroll speed
+let userVelocity = 0;  // reacts to scroll input
 let loopWidth;
 
-// Wait for all images to load first
+// Wait for images to load
 const images = track.querySelectorAll("img");
 let loadedCount = 0;
 
@@ -23,26 +22,36 @@ images.forEach(img => {
 if (loadedCount === images.length) startCarousel();
 
 function startCarousel() {
-  // calculate loop width after images are loaded
+  // Duplicate images for seamless loop
+  track.innerHTML += track.innerHTML;
   loopWidth = track.scrollWidth / 2;
 
+  // Track user vertical scroll
+  window.addEventListener("scroll", () => {
+    const delta = window.scrollY - (window.lastScrollY || 0);
+    window.lastScrollY = window.scrollY;
+
+    userVelocity += delta * 0.1; // scroll sensitivity
+  });
+
   function animate() {
-    const delta = window.scrollY - lastScroll;
-    lastScroll = window.scrollY;
-
-    velocity += delta * 0.02; // scroll accelerates/reverses motion
-    velocity *= 0.92;          // friction to smooth out
-
+    // Auto-scroll plus user input
+    velocity += userVelocity;
+    userVelocity *= 0.8; // smooth out user input
     position += velocity;
 
-    // Infinite wrap
+    // infinite wrap
     if (position > loopWidth) position -= loopWidth;
     if (position < 0) position += loopWidth;
 
     track.style.transform = `translateX(${-position}px)`;
+
+    // base friction for smooth auto-scroll
+    velocity *= 0.98;
 
     requestAnimationFrame(animate);
   }
 
   animate();
 }
+
