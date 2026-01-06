@@ -1,6 +1,5 @@
 /* Container that ensures carousel touches edges */
 #carousel-wrap {
-  overflow: hidden;
   width: 100vw;       /* full viewport width */
   padding: 60px 0;    /* top/bottom spacing */
   box-sizing: border-box;
