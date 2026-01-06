@@ -4,12 +4,13 @@ body {
   background: #f0f0f0;
 }
 
+/* Add margin-top to move the carousel further down */
 #carousel-wrap {
   width: 100vw;
   padding: 60px 0;
+  margin-top: 200px; /* Adjust this value to move carousel further down */
   box-sizing: border-box;
   overflow: hidden;
-  position: relative;
 }
 
 #carousel-track {
