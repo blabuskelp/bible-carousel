@@ -24,30 +24,29 @@ if (loadedCount === images.length) startCarousel();
 function startCarousel() {
   // Duplicate images for seamless loop
   track.innerHTML += track.innerHTML;
-  loopWidth = track.scrollWidth / 2;
 
-  // Track vertical scroll
-  window.addEventListener("scroll", () => {
-    const delta = window.scrollY - (window.lastScrollY || 0);
-    window.lastScrollY = window.scrollY;
-    userVelocity += delta * 0.03; // slower, smoother scroll effect
+  // Wait for browser to render duplicated images
+  requestAnimationFrame(() => {
+    loopWidth = track.scrollWidth / 2;
+
+    // Track vertical scroll
+    window.addEventListener("scroll", () => {
+      const delta = window.scrollY - (window.lastScrollY || 0);
+      window.lastScrollY = window.scrollY;
+      userVelocity += delta * 0.1; // slower, smoother scroll effect
+    });
+
+    function animate() {
+      position += baseVelocity + userVelocity;
+      userVelocity *= 0.8;
+
+      if (position > loopWidth) position -= loopWidth;
+      if (position < 0) position += loopWidth;
+
+      track.style.transform = `translateX(${-position}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   });
-
-  function animate() {
-    // Base auto-scroll + user input
-    position += baseVelocity + userVelocity;
-
-    // Smooth out user input over time
-    userVelocity *= 0.8;
-
-    // Infinite wrap
-    if (position > loopWidth) position -= loopWidth;
-    if (position < 0) position += loopWidth;
-
-    track.style.transform = `translateX(${-position}px)`;
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
 }
