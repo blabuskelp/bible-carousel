@@ -32,7 +32,7 @@ function startCarousel() {
     window.lastScrollY = window.scrollY;
 
     // Slower, smoother scroll reaction
-    userVelocity += delta * 0.03; // smaller multiplier = slower scroll effect
+    userVelocity += delta * 0.05; // smaller multiplier = slower scroll effect
   });
 
   function animate() {
@@ -40,7 +40,7 @@ function startCarousel() {
     position += velocity + userVelocity;
 
     // Smooth out user input over time
-    userVelocity *= 0.8;
+    userVelocity *= 0.5;
 
     // Infinite wrap
     if (position > loopWidth) position -= loopWidth;
