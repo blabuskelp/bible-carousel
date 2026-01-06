@@ -1,0 +1,32 @@
+/* Container that ensures carousel touches edges */
+#carousel-wrap {
+  overflow: hidden;
+  width: 100vw;       /* full viewport width */
+  padding: 60px 0;    /* top/bottom spacing */
+  box-sizing: border-box;
+  position: relative;  /* ensures absolute child elements behave correctly */
+}
+
+/* Track holding all images */
+#carousel-track {
+  display: flex;
+  gap: 12px;           /* narrow spacing between images */
+  will-change: transform;
+}
+
+/* Images styling */
+#carousel-track img {
+  height: 320px;
+  border-radius: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  user-select: none;   /* prevents text selection dragging */
+  pointer-events: none; /* prevents accidental interaction */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #carousel-track img {
+    height: 200px;
+  }
+}
