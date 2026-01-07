@@ -7,7 +7,7 @@ let direction = 1;     // +1 or -1
 
 let impulseVelocity = 0;
 const FRICTION = 0.82;
-const SCROLL_FORCE = 0.04;
+const SCROLL_FORCE = 0.08;
 
 let lastScroll = window.scrollY;
 
@@ -17,7 +17,7 @@ function animate() {
   lastScroll = scrollY;
 
   if (Math.abs(delta) > 0.2) {
-    direction = delta > 0 ? 1 : -1;
+    direction = delta > 0 ? -1 : 1;
     impulseVelocity += delta * SCROLL_FORCE;
   }
 
