@@ -3,46 +3,50 @@
   width: 100vw;
   padding: 60px 0;
   box-sizing: border-box;
-}
-
-#my-carousel-widget .carousel-wrap {
-  width: 100%;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
+/* Outer frame */
+#my-carousel-widget .carousel-wrap {
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Moving strip */
 #my-carousel-widget .carousel-track {
   display: flex;
-  gap: 12px;
   will-change: transform;
-  position: relative;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-left: -12px;
-  margin-right: -12px;
 }
 
+/* Images */
 #my-carousel-widget .carousel-track img {
-  width: 20vw;           /* responsive width */
-  aspect-ratio: 1/1;     /* keeps images square */
+  width: calc(100vw / 5);
+  aspect-ratio: 1 / 1;
   flex-shrink: 0;
   object-fit: cover;
-  object-position: center;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   user-select: none;
   pointer-events: none;
 }
 
-/* Optional: responsive scaling */
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 1024px) {
   #my-carousel-widget .carousel-track img {
-    width: 30vw;
+    width: calc(100vw / 4);
   }
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+  #my-carousel-widget .carousel-track img {
+    width: calc(100vw / 3);
+  }
+}
+
+/* Small phones */
 @media (max-width: 480px) {
   #my-carousel-widget .carousel-track img {
-    width: 45vw;
+    width: calc(100vw / 2);
   }
 }
