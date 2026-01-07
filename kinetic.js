@@ -18,7 +18,7 @@ function animate() {
 
   if (Math.abs(delta) > 0.2) {
     direction = delta > 0 ? -1 : 1;
-    impulseVelocity += delta * SCROLL_FORCE;
+    impulseVelocity = delta * SCROLL_FORCE * direction;
   }
 
   impulseVelocity *= FRICTION;
