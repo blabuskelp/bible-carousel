@@ -1,10 +1,10 @@
 /* Carousel Widget CSS — Square Images, Slightly Rounded Corners */
 
 #my-carousel-widget {
-  margin-top: 200px;      /* vertical placement */
-  margin-left: auto;
-  margin-right: auto;     /* center horizontally */
-  max-width: 90vw;
+  margin: 0;           /* remove auto centering */
+  width: 100vw;        /* full viewport width */
+  padding: 60px 0;     /* optional top/bottom spacing */
+  box-sizing: border-box;
 }
 
 #my-carousel-widget .carousel-wrap {
