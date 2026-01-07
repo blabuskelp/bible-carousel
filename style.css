@@ -1,17 +1,14 @@
-/* Carousel Widget CSS — Square Images, Slightly Rounded Corners */
-
 #my-carousel-widget {
-  margin: 0;           /* remove auto centering */
-  width: 100vw;        /* full viewport width */
-  padding: 60px 0;     /* optional top/bottom spacing */
+  margin: 0;
+  width: 100vw;
+  padding: 60px 0;
   box-sizing: border-box;
 }
 
 #my-carousel-widget .carousel-wrap {
   width: 100%;
-  padding: 60px 0;
-  box-sizing: border-box;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 #my-carousel-widget .carousel-track {
@@ -19,38 +16,33 @@
   gap: 12px;
   will-change: transform;
   position: relative;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: -12px;
+  margin-right: -12px;
 }
 
 #my-carousel-widget .carousel-track img {
-  width: 400px;          /* square width */
-  height: 400px;         /* square height */
-  flex-shrink: 0;        /* prevents shrinking */
-  object-fit: cover;     /* fills box, crops edges if needed */
+  width: 20vw;           /* responsive width */
+  aspect-ratio: 1/1;     /* keeps images square */
+  flex-shrink: 0;
+  object-fit: cover;
   object-position: center;
-  border-radius: 8px;    /* slightly rounded corners */
+  border-radius: 8px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   user-select: none;
   pointer-events: none;
 }
 
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  #my-carousel-widget .carousel-track img {
-    width: 300px;
-    height: 300px;
-  }
-}
-
+/* Optional: responsive scaling */
 @media (max-width: 768px) {
   #my-carousel-widget .carousel-track img {
-    width: 250px;
-    height: 250px;
+    width: 30vw;
   }
 }
 
 @media (max-width: 480px) {
   #my-carousel-widget .carousel-track img {
-    width: 180px;
-    height: 180px;
+    width: 45vw;
   }
 }
