@@ -20,17 +20,22 @@ body {
   position: relative;
 }
 
+/* Images styling: taller and uniform width */
 #carousel-track img {
-  height: 320px;
+  height: 400px;        /* taller images */
+  width: 600px;         /* uniform width */
+  flex-shrink: 0;       /* prevent shrinking */
+  object-fit: cover;    /* fills the box, crops if necessary */
   border-radius: 20px;
-  flex-shrink: 0;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   user-select: none;
   pointer-events: none;
 }
 
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   #carousel-track img {
-    height: 200px;
+    height: 250px;       /* smaller height on mobile */
+    width: 400px;        /* smaller width on mobile */
   }
 }
