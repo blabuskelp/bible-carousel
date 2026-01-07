@@ -1,34 +1,33 @@
-/* Carousel Styling — Square Images with Slightly Rounded Corners */
+/* Carousel Widget CSS — Square Images, Slightly Rounded Corners */
 
-body {
-  margin: 0;
-  overflow-x: hidden;
-  background: #f0f0f0;
+#my-carousel-widget {
+  margin-top: 200px;      /* vertical placement */
+  margin-left: auto;
+  margin-right: auto;     /* center horizontally */
+  max-width: 90vw;
 }
 
-#carousel-wrap {
-  width: 100vw;
+#my-carousel-widget .carousel-wrap {
+  width: 100%;
   padding: 60px 0;
-  margin-top: 500px; /* adjust vertical position as needed */
   box-sizing: border-box;
   overflow: hidden;
 }
 
-#carousel-track {
+#my-carousel-widget .carousel-track {
   display: flex;
   gap: 12px;
   will-change: transform;
   position: relative;
 }
 
-/* Square, uniform images with slightly rounded corners */
-#carousel-track img {
-  width: 400px;        /* square width */
-  height: 400px;       /* square height */
-  flex-shrink: 0;      /* prevent shrinking */
-  object-fit: cover;   /* fills the box, crops edges if necessary */
+#my-carousel-widget .carousel-track img {
+  width: 400px;          /* square width */
+  height: 400px;         /* square height */
+  flex-shrink: 0;        /* prevents shrinking */
+  object-fit: cover;     /* fills box, crops edges if needed */
   object-position: center;
-  border-radius: 8px;  /* slightly rounded corners */
+  border-radius: 8px;    /* slightly rounded corners */
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   user-select: none;
   pointer-events: none;
@@ -36,21 +35,21 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  #carousel-track img {
+  #my-carousel-widget .carousel-track img {
     width: 300px;
     height: 300px;
   }
 }
 
 @media (max-width: 768px) {
-  #carousel-track img {
+  #my-carousel-widget .carousel-track img {
     width: 250px;
     height: 250px;
   }
 }
 
 @media (max-width: 480px) {
-  #carousel-track img {
+  #my-carousel-widget .carousel-track img {
     width: 180px;
     height: 180px;
   }
