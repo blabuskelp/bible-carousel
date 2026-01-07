@@ -1,45 +1,68 @@
+// Kinetic carousel JS — fully corrected
 const track = document.getElementById("carousel-track");
 
-// Duplicate images for seamless infinite scroll
-track.innerHTML += track.innerHTML;
-let loopWidth = track.scrollWidth / 2;
-
 let position = 0;
-const TARGET_SPEED = 1;      // Constant cruise speed
+const TARGET_SPEED = 1;      // cruise speed in px/frame
 let direction = 1;           // +1 = left->right, -1 = right->left
 let impulseVelocity = 0;
 
-const FRICTION = 0.82;       // How quickly impulse decays
-const SCROLL_FORCE = 0.08;   // Strength of user scroll boost
+const SCROLL_FORCE = 0.2;    // stronger user scroll boost
+const FRICTION = 0.9;        // slower decay = impulse lasts longer
+
 let lastScroll = window.scrollY;
 
-function animate() {
-  const scrollY = window.scrollY;
-  const delta = scrollY - lastScroll;
-  lastScroll = scrollY;
+// Wait for all images to load before duplicating track
+const images = track.querySelectorAll('img');
+let loadedCount = 0;
 
-  if (Math.abs(delta) > 0.2) {
-    // Flip cruise direction based on scroll
-    direction = delta > 0 ? -1 : 1;
-
-    // Add impulse in current direction
-    impulseVelocity += delta * SCROLL_FORCE * direction;
+images.forEach(img => {
+  if (img.complete) {
+    loadedCount++;
+  } else {
+    img.addEventListener('load', () => {
+      loadedCount++;
+      if (loadedCount === images.length) startCarousel();
+    });
   }
+});
 
-  // Smoothly decay the impulse over time
-  impulseVelocity *= FRICTION;
+if (loadedCount === images.length) startCarousel();
 
-  // Combine cruise speed + impulse
-  const finalVelocity = TARGET_SPEED * direction + impulseVelocity;
-  position += finalVelocity;
+function startCarousel() {
+  // Duplicate track AFTER images are loaded
+  track.innerHTML += track.innerHTML;
 
-  // Infinite wrap logic
-  if (position >= loopWidth) position -= loopWidth;
-  if (position < 0) position += loopWidth;
+  // Wait a frame to ensure browser has rendered duplicated images
+  requestAnimationFrame(() => {
+    const loopWidth = track.scrollWidth / 2;
 
-  track.style.transform = `translateX(${-position}px)`;
+    function animate() {
+      const scrollY = window.scrollY;
+      const delta = scrollY - lastScroll;
+      lastScroll = scrollY;
 
-  requestAnimationFrame(animate);
+      // Update direction and apply user impulse
+      if (Math.abs(delta) > 0.2) {
+        direction = delta > 0 ? -1 : 1;
+        impulseVelocity += delta * SCROLL_FORCE * direction;
+      }
+
+      // Smoothly decay the impulse
+      impulseVelocity *= FRICTION;
+
+      // Final velocity = cruise + impulse
+      const finalVelocity = TARGET_SPEED * direction + impulseVelocity;
+      position += finalVelocity;
+
+      // Infinite wrap
+      if (position >= loopWidth) position -= loopWidth;
+      if (position < 0) position += loopWidth;
+
+      track.style.transform = `translateX(${-position}px)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  });
 }
-
-animate();
