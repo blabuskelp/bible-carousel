@@ -1,48 +1,29 @@
-#my-carousel-widget {
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.spacer {
+  height: 900px; /* pushes carousel partway down page */
+}
+
+#carousel-wrap {
   width: 100vw;
   overflow: hidden;
   padding: 60px 0;
 }
 
-/* viewport */
-#my-carousel-widget .carousel-wrap {
-  width: 100vw;
-  overflow: hidden;
-}
-
-/* scrolling strip */
-#my-carousel-widget .carousel-track {
+#carousel-track {
   display: flex;
+  gap: 16px;
   will-change: transform;
-  gap: 6px;
 }
 
-/* image cards */
-#my-carousel-widget .carousel-track img {
-  width: calc((100vw - 120px) / 5);   /* reserves spacing */
+#carousel-track img {
+  width: 360px;
   aspect-ratio: 1 / 1;
-  flex-shrink: 0;
   object-fit: cover;
   border-radius: 10px;
-  margin-right: 24px;                 /* real spacing */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-  user-select: none;
-  pointer-events: none;
-}
-
-/* responsive */
-@media (max-width: 1024px) {
-  #my-carousel-widget .carousel-track img {
-    width: calc((100vw - 96px) / 4);
-  }
-}
-@media (max-width: 768px) {
-  #my-carousel-widget .carousel-track img {
-    width: calc((100vw - 72px) / 3);
-  }
-}
-@media (max-width: 480px) {
-  #my-carousel-widget .carousel-track img {
-    width: calc((100vw - 48px) / 2);
-  }
+  flex-shrink: 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,.15);
 }
