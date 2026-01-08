@@ -14,7 +14,7 @@
 #my-carousel-widget .carousel-track {
   display: flex;
   will-change: transform;
-  padding-left: 24px;
+  gap: 6px;
 }
 
 /* image cards */
